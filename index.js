@@ -15,6 +15,34 @@ app.get('/contact', (req, res) => {
   res.send('Contact page');
 });
 
+app.get('/member', (req, res) => {
+  res.send('Member page');
+});
+
+const users = [];
+
+app.post('/sign-up', (req, res) => {
+  const { name, email, password } = req.body;
+  const existingUser = users.find(user => user.email === email);
+  if (existingUser) {
+    res.status(400).send('The user already exist');
+  } else {
+    const newUser = { name, email, password, id: users.length + 1 };
+    users.push(newUser);
+    res.send(newUser);
+  }
+});
+
+app.post('/sign-in', (req, res) => {
+  const { email, password } = req.body;
+  const existingUser = users.find(user => user.email === email && user.password === password);
+  if (existingUser) {
+    res.send(existingUser);
+  } else {
+    res.status(400).send('Wrong credential');
+  }
+});
+
 app.post('/books', (req, res) => {
   const { title, author } = req.body;
   const newBook = { title, author, id: books.length + 1 };
