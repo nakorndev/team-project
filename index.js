@@ -15,6 +15,10 @@ app.get('/contact', (req, res) => {
   res.send('Contact page');
 });
 
+app.get('/admin', (req, res) => {
+  res.send('Admin page');
+});
+
 app.post('/books', (req, res) => {
   const { title, author } = req.body;
   const newBook = { title, author, id: books.length + 1 };
