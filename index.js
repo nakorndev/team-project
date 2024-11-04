@@ -19,6 +19,18 @@ app.get('/admin', (req, res) => {
   res.send('Admin page');
 });
 
+app.post('/admin/login', (req, res) => {
+  const { username, password } = req.body;
+  // Replace with actual admin credentials validation logic
+  const isAdmin = username === 'admin' && password === 'admin123';
+
+  if (isAdmin) {
+    res.send({ success: true, message: 'Logged in as admin' });
+  } else {
+    res.status(401).send({ success: false, message: 'Invalid credentials' });
+  }
+});
+
 app.post('/books', (req, res) => {
   const { title, author } = req.body;
   const newBook = { title, author, id: books.length + 1 };
