@@ -22,6 +22,10 @@ app.post('/books', (req, res) => {
   res.send(newBook);
 });
 
+app.get('/books', (req, res) => {
+  res.send(books);
+});
+
 app.get('/books/:id', (req, res) => {
   const { id } = req.params;
   const foundBook = books.find(book => book.id === Number(id));
