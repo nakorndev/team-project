@@ -32,6 +32,18 @@ app.get('/books/:id', (req, res) => {
   }
 });
 
+app.put('/books/:id', (req, res) => {
+  const { id } = req.params;
+  const { title, author } = req.body;
+  const index = books.findIndex(book => book.id === Number(id));
+  if (index > -1) {
+    books[index] = { title, author, id: Number(id) };
+    res.send(books[index]);
+  } else {
+    res.status(404).send({});
+  }
+});
+
 app.delete('/books/:id', (req, res) => {
   const { id } = req.params;
   const index = books.findIndex(book => book.id === Number(id));
